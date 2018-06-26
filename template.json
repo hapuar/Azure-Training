@@ -1,0 +1,62 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_Azure_Local_name": {
+            "defaultValue": "Azure_Local",
+            "type": "String"
+        },
+        "subnets_DMZ_name": {
+            "defaultValue": "DMZ",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/fcebdb0c-44cf-4d89-8248-e9acdbafd358/resourceGroups/securityessentialsp1/providers/Microsoft.Network/virtualNetworks/Azure_Local'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_Azure_Local_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "northeurope",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "ad8769b2-ef4b-4800-97bb-554a6967359b",
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.220.0.0/23"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "DMZ",
+                        "etag": "W/\"5651aa8b-0e3a-414f-b55d-419d6721bcc2\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.220.0.64/26"
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false,
+                "enableVmProtection": false
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/fcebdb0c-44cf-4d89-8248-e9acdbafd358/resourceGroups/securityessentialsp1/providers/Microsoft.Network/virtualNetworks/Azure_Local/subnets/DMZ'.",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[concat(parameters('virtualNetworks_Azure_Local_name'), '/', parameters('subnets_DMZ_name'))]",
+            "apiVersion": "2018-02-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.220.0.64/26"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_Azure_Local_name'))]"
+            ]
+        }
+    ]
+}
